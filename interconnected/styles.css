@@ -161,3 +161,23 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
   transform: scale(1.1);
 }
+
+@media (max-width: 600px) {
+  .typewrite {
+    font-size: 1.5rem;
+  }
+
+  .hover-text {
+    font-size: 1.5rem;
+  }
+
+  .shining-text {
+    font-size: 1.5rem;
+  }
+
+  .category-link {
+    font-size: 1rem;
+    width: 50px;
+    height: 30px;
+  }
+}
