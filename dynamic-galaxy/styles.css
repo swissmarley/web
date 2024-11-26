@@ -33,37 +33,7 @@ body {
     position: relative;
 }
 
-.shine-wrapper {
-    position: relative;
-    margin-bottom: 2rem;
-}
 
-.title {
-    font-size: 5rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    text-align: center;
-}
-
-.title-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.8) 50%,
-        transparent 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 3s linear infinite;
-    z-index: 2;
-}
 
 @keyframes shine {
     0% {
@@ -187,20 +157,6 @@ body {
     margin-bottom: 1rem;
 }
 
-@media (max-width: 768px) {
-    .title {
-        font-size: 3rem;
-    }
-
-    .subtitle {
-        font-size: 1.2rem;
-    }
-
-    .features {
-        grid-template-columns: 1fr;
-    }
-}
-
 .magic-text {
     font-size: 5rem;
     font-weight: bold;
@@ -263,6 +219,7 @@ body {
     }
 }
 
+/* Glowing effect */
 .magic-text {
     animation: glow 3s infinite alternate;
 }
@@ -279,3 +236,30 @@ body {
     }
 }
 
+@media (max-width: 800px) {
+    .magic-text {
+        font-size: 3rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 400px) {
+    .magic-text {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .features {
+        grid-template-columns: 0.8fr;
+    }
+}
