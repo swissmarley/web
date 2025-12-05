@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>SPUTNIK Particle System</title>
+    <link rel="stylesheet" href="styles.css">
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- NOTE: For production do NOT use the CDN. Install Tailwind as a PostCSS plugin or use the Tailwind CLI.
+            See: https://tailwindcss.com/docs/installation -->
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- MediaPipe Hands -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Camera Feed (Small preview) -->
+    <video id="video-input"></video>
+
+    <!-- Loading Screen -->
+    <div id="loading-overlay">
+        <div class="cyber-loader">
+            <div class="cyber-ring"></div>
+            <div class="cyber-ring"></div>
+            <div class="cyber-ring"></div>
+            <div class="cyber-center"></div>
+        </div>
+        <div class="glitch-text">SPUTNIK</div>
+        <p class="status-text">
+            <span class="status-dot"></span>
+            <span>Initializing Neural Network...</span>
+        </p>
+        <div class="scanline"></div>
+    </div>
+
+    <!-- UI Overlay -->
+    <div class="absolute inset-0 pointer-events-none flex flex-col justify-between p-6 z-20">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-start pointer-events-auto">
+            <div class="glass-panel p-4">
+                <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    Aether Particles
+                </h1>
+                <p class="text-xs text-gray-400 mt-1">
+                    <span id="status-text" class="text-yellow-500">● Waiting for hands...</span>
+                </p>
+                <div class="text-[10px] text-gray-500 mt-2 max-w-[200px] leading-tight">
+                    <b>Controls:</b><br>
+                    • Spread hands: Scale Up<br>
+                    • Open Palms: Scatter / Explode<br>
+                    • Closed Fists: Condense / Stabilize
+                </div>
+            </div>
+
+            <!-- Color Picker -->
+            <div class="glass-panel p-3 flex items-center gap-3">
+                <label for="colorPicker" class="text-sm font-medium text-gray-300">Theme</label>
+                <input type="color" id="colorPicker" value="#4aaaff" class="w-8 h-8 rounded cursor-pointer bg-transparent border-0 p-0">
+            </div>
+        </div>
+
+        <!-- Template Selector -->
+        <div class="w-full flex justify-center pointer-events-auto">
+            <div class="glass-panel p-2 flex gap-2 overflow-x-auto scrollbar-hide max-w-[90vw]">
+                <button class="btn-template active px-4 py-2 rounded-lg text-sm font-medium flex flex-col items-center gap-1 min-w-[70px]" onclick="setShape('sphere')">
+                    <i data-lucide="circle" class="w-5 h-5"></i> Sphere
+                </button>
+                <button class="btn-template px-4 py-2 rounded-lg text-sm font-medium flex flex-col items-center gap-1 min-w-[70px]" onclick="setShape('heart')">
+                    <i data-lucide="heart" class="w-5 h-5"></i> Heart
+                </button>
+                <button class="btn-template px-4 py-2 rounded-lg text-sm font-medium flex flex-col items-center gap-1 min-w-[70px]" onclick="setShape('flower')">
+                    <i data-lucide="flower-2" class="w-5 h-5"></i> Flower
+                </button>
+                <button class="btn-template px-4 py-2 rounded-lg text-sm font-medium flex flex-col items-center gap-1 min-w-[70px]" onclick="setShape('saturn')">
+                    <i data-lucide="disc" class="w-5 h-5"></i> Saturn
+                </button>
+                <button class="btn-template px-4 py-2 rounded-lg text-sm font-medium flex flex-col items-center gap-1 min-w-[70px]" onclick="setShape('statue')">
+                    <i data-lucide="user" class="w-5 h-5"></i> Statue
+                </button>
+                <button class="btn-template px-4 py-2 rounded-lg text-sm font-medium flex flex-col items-center gap-1 min-w-[70px]" onclick="setShape('fireworks')">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i> Burst
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

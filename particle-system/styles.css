@@ -1,0 +1,186 @@
+body { margin: 0; overflow: hidden; background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
+        canvas { display: block; }
+        #video-input { position: absolute; top: 10px; right: 10px; width: 160px; height: 120px; border-radius: 8px; transform: scaleX(-1); opacity: 0.5; z-index: 10; border: 1px solid #333; }
+        
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        .btn-template {
+            transition: all 0.3s ease;
+        }
+        .btn-template:hover, .btn-template.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* Custom scrollbar for templates if needed */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        #loading-overlay {
+            position: fixed; inset: 0; background: linear-gradient(135deg, #0a0a0a 0%, #0f0f1e 50%, #0a0a0a 100%); z-index: 50;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Cyber Loading Animation */
+        .cyber-loader {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 40px;
+        }
+
+        .cyber-ring {
+            position: absolute;
+            inset: 0;
+            border: 2px solid;
+            border-radius: 50%;
+            border-top-color: #00ff88;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: #00ffff;
+            animation: spin-ring 3s linear infinite;
+        }
+
+        .cyber-ring:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-top-color: #00ffff;
+            border-left-color: #ff00ff;
+            animation: spin-ring 2s linear infinite reverse;
+        }
+
+        .cyber-ring:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border-top-color: #ff00ff;
+            border-left-color: #00ff88;
+            animation: spin-ring 1.5s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4), inset 0 0 15px rgba(0, 255, 200, 0.2);
+        }
+
+        @keyframes spin-ring {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cyber-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #00ffff 0%, #00ff88 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0, 255, 136, 0.5);
+            animation: pulse-core 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse-core {
+            0%, 100% { 
+                box-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0, 255, 136, 0.5);
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 30px #ff00ff, 0 0 60px rgba(255, 0, 255, 0.7);
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        .glitch-text {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #00ffff;
+            position: relative;
+            text-shadow: 2px 2px 0 #ff00ff, 4px 4px 0 #00ff88;
+            animation: glitch-anim 0.3s infinite;
+            margin-bottom: 8px;
+        }
+
+        @keyframes glitch-anim {
+            0% { 
+                text-shadow: 2px 2px 0 #ff00ff, 4px 4px 0 #00ff88;
+                transform: translate(0, 0);
+            }
+            20% { 
+                text-shadow: -2px -2px 0 #00ff88, -4px -4px 0 #ff00ff;
+                transform: translate(-2px, 2px);
+            }
+            40% { 
+                text-shadow: 2px -2px 0 #00ffff, -4px 4px 0 #ff00ff;
+                transform: translate(2px, -2px);
+            }
+            60% { 
+                text-shadow: -2px 2px 0 #ff00ff, 4px -4px 0 #00ffff;
+                transform: translate(-2px, -2px);
+            }
+            80% { 
+                text-shadow: 2px 2px 0 #00ff88, -4px -4px 0 #00ffff;
+                transform: translate(2px, 2px);
+            }
+            100% { 
+                text-shadow: 2px 2px 0 #ff00ff, 4px 4px 0 #00ff88;
+                transform: translate(0, 0);
+            }
+        }
+
+        .status-text {
+            font-size: 13px;
+            color: #00ff88;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #ff00ff;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .scanline {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 136, 0.03) 0px,
+                rgba(0, 255, 136, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            animation: scanlines 8s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(10px); }
+        }
